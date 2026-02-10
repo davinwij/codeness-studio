@@ -1,42 +1,15 @@
-import { Globe, Layers, Palette } from "lucide-react";
+"use client";
 
-const services = [
-    {
-        icon: Globe,
-        title: "Web Application Development",
-        description:
-            "Platform digital custom yang dirancang untuk menyederhanakan operasi bisnis Anda. Scalable, secure, dan sesuai kebutuhan.",
-        highlights: [
-            "Enterprise Resource Planning (ERP)",
-            "E-commerce & Booking Platform",
-            "Data Visualization Dashboard",
-        ],
-    },
-    {
-        icon: Layers,
-        title: "Microservices Architecture",
-        description:
-            "Future-proof teknologi Anda dengan arsitektur modular dan high-performance yang dirancang untuk ketahanan dan skalabilitas.",
-        highlights: [
-            "Refactoring Legacy System",
-            "High-Availability Transaction",
-            "API Integration Ecosystem",
-        ],
-    },
-    {
-        icon: Palette,
-        title: "UI/UX Design",
-        description:
-            "Ciptakan user experience yang memukau. Kami menggabungkan estetika dengan fungsionalitas agar pengguna menyukai produk Anda.",
-        highlights: [
-            "Mobile App Prototyping",
-            "Website Redesign & Optimization",
-            "User Journey Mapping",
-        ],
-    },
-];
+import { Bot, Globe, Layers, Palette } from "lucide-react";
+import { content, type Lang } from "@/components/landing/content";
 
-export default function Services() {
+type ServicesProps = {
+    lang: Lang;
+};
+
+export default function Services({ lang }: ServicesProps) {
+    const t = content[lang].services;
+    const serviceIcons = [Globe, Layers, Palette, Bot];
     return (
         <section id="services" className="relative py-24 sm:py-32 bg-gray-50/50">
             {/* Subtle top gradient divider */}
@@ -46,21 +19,21 @@ export default function Services() {
                 {/* Section Header */}
                 <div className="text-center max-w-2xl mx-auto mb-16">
                     <span className="inline-block px-4 py-1.5 rounded-full bg-brand-50 text-brand text-sm font-medium mb-4">
-                        Our Core Services
+                        {t.badge}
                     </span>
                     <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
-                        Solusi Digital{" "}
-                        <span className="text-brand">Terintegrasi</span>
+                        {t.title}{" "}
+                        <span className="text-brand">{t.titleAccent}</span>
                     </h2>
                     <p className="mt-4 text-gray-500 text-lg leading-relaxed">
-                        Kami membantu bisnis Anda bertransformasi melalui layanan teknologi yang terstruktur dan terukur.
+                        {t.description}
                     </p>
                 </div>
 
                 {/* Service Cards */}
-                <div className="grid md:grid-cols-3 gap-8">
-                    {services.map((service, index) => {
-                        const Icon = service.icon;
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {t.items.map((service, index) => {
+                        const Icon = serviceIcons[index];
                         return (
                             <div
                                 key={index}

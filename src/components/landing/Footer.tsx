@@ -1,6 +1,17 @@
-import { Mail, Phone, Globe } from "lucide-react";
+"use client";
 
-export default function Footer() {
+import Image from "next/image";
+import { Mail, Phone, Globe } from "lucide-react";
+import { content, type Lang } from "@/components/landing/content";
+
+type FooterProps = {
+    lang: Lang;
+};
+
+export default function Footer({ lang }: FooterProps) {
+    const t = content[lang].footer;
+    const year = new Date().getFullYear();
+    const copyright = t.copyright.replace("{year}", String(year));
     return (
         <>
             {/* CTA Section */}
@@ -19,10 +30,10 @@ export default function Footer() {
 
                 <div className="relative mx-auto max-w-4xl px-6 sm:px-8 lg:px-12 text-center">
                     <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-                        Siap Transformasi Bisnis Anda?
+                        {t.ctaTitle}
                     </h2>
                     <p className="mt-6 text-lg text-white/80 max-w-xl mx-auto leading-relaxed">
-                        Mari diskusikan bagaimana kami dapat membantu membangun budaya digital yang berkelanjutan untuk bisnis Anda.
+                        {t.ctaDescription}
                     </p>
 
                     <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -31,7 +42,7 @@ export default function Footer() {
                             className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-semibold text-brand shadow-xl hover:bg-gray-50 transition-all duration-300 hover:-translate-y-1 hover:scale-105"
                         >
                             <Mail className="w-5 h-5 mr-2" />
-                            Hubungi Kami
+                            {t.ctaPrimary}
                         </a>
                         <a
                             href="https://wa.me/6281234567890"
@@ -40,7 +51,7 @@ export default function Footer() {
                             className="inline-flex items-center justify-center rounded-full border-2 border-white/30 px-8 py-4 text-base font-semibold text-white hover:bg-white/10 transition-all duration-300"
                         >
                             <Phone className="w-5 h-5 mr-2" />
-                            WhatsApp
+                            {t.ctaSecondary}
                         </a>
                     </div>
 
@@ -69,25 +80,24 @@ export default function Footer() {
                 <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                         {/* Logo */}
-                        <div className="flex items-center gap-2">
-                            <div className="w-7 h-7 rounded-full border-2 border-brand flex items-center justify-center">
-                                <div className="w-4 h-4 rounded-full border-[1.5px] border-brand flex items-center justify-center">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-brand" />
-                                </div>
-                            </div>
-                            <span className="font-heading text-sm font-bold text-white">
-                                Codeness <span className="text-brand">Studio</span>
-                            </span>
+                        <div className="flex items-center">
+                            <Image
+                                src="/Codeness%20Logo%20with%20Text.png"
+                                alt="Codeness Studio"
+                                width={200}
+                                height={40}
+                                className="h-7 w-auto"
+                            />
                         </div>
 
                         {/* Tagline */}
                         <p className="text-xs text-gray-500 italic" style={{ fontFamily: "'Georgia', serif" }}>
-                            Start Your Digital Culture with Us
+                            {t.tagline}
                         </p>
 
                         {/* Copyright */}
                         <p className="text-xs text-gray-500">
-                            © {new Date().getFullYear()} Codeness Studio. All rights reserved.
+                            {copyright}
                         </p>
                     </div>
                 </div>

@@ -1,3 +1,5 @@
+"use client";
+
 import {
     Search,
     PenTool,
@@ -7,46 +9,23 @@ import {
     Rocket,
     TrendingUp,
 } from "lucide-react";
+import { content, type Lang } from "@/components/landing/content";
 
-const steps = [
-    {
-        icon: Search,
-        title: "Discovery & Requirement",
-        description: "Memahami kebutuhan bisnis dan konteks teknis Anda.",
-    },
-    {
-        icon: PenTool,
-        title: "UX Research & Flow",
-        description: "Memetakan user journey untuk solusi yang intuitif.",
-    },
-    {
-        icon: LayoutDashboard,
-        title: "Architecture & Planning",
-        description: "Merancang fondasi teknis yang scalable.",
-    },
-    {
-        icon: Code2,
-        title: "Agile Development",
-        description: "Membangun secara iteratif dengan keterlibatan aktif.",
-    },
-    {
-        icon: ShieldCheck,
-        title: "QA & Testing",
-        description: "Pengujian menyeluruh untuk fungsionalitas dan keamanan.",
-    },
-    {
-        icon: Rocket,
-        title: "Deployment",
-        description: "Peluncuran yang mulus dengan downtime minimal.",
-    },
-    {
-        icon: TrendingUp,
-        title: "Monitoring & Improvement",
-        description: "Dukungan berkelanjutan dan optimasi berbasis data.",
-    },
-];
+type ProcessProps = {
+    lang: Lang;
+};
 
-export default function Process() {
+export default function Process({ lang }: ProcessProps) {
+    const t = content[lang].process;
+    const stepIcons = [
+        Search,
+        PenTool,
+        LayoutDashboard,
+        Code2,
+        ShieldCheck,
+        Rocket,
+        TrendingUp,
+    ];
     return (
         <section id="process" className="relative py-24 sm:py-32 bg-white overflow-hidden">
             {/* Background decoration */}
@@ -57,14 +36,14 @@ export default function Process() {
                 {/* Section Header */}
                 <div className="text-center max-w-2xl mx-auto mb-20">
                     <span className="inline-block px-4 py-1.5 rounded-full bg-brand-50 text-brand text-sm font-medium mb-4">
-                        How We Work
+                        {t.badge}
                     </span>
                     <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
-                        Proses Kerja{" "}
-                        <span className="text-brand">Terstruktur</span>
+                        {t.title}{" "}
+                        <span className="text-brand">{t.titleAccent}</span>
                     </h2>
                     <p className="mt-4 text-gray-500 text-lg leading-relaxed">
-                        Kami mengikuti metodologi yang terbukti untuk memastikan setiap proyek disampaikan tepat waktu dan berkualitas tinggi.
+                        {t.description}
                     </p>
                 </div>
 
@@ -74,8 +53,8 @@ export default function Process() {
                     <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand/20 via-brand/40 to-brand/20" />
 
                     <div className="space-y-12 lg:space-y-0">
-                        {steps.map((step, index) => {
-                            const Icon = step.icon;
+                        {t.steps.map((step, index) => {
+                            const Icon = stepIcons[index];
                             const isLeft = index % 2 === 0;
                             return (
                                 <div key={index} className="relative lg:flex lg:items-center lg:mb-16 last:lg:mb-0">
