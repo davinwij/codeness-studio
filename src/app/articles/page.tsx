@@ -4,6 +4,15 @@ import Link from "next/link";
 import { Mail, Phone, Calendar, ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
+type ArticleListItem = {
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    thumbnailUrl: string;
+    createdAt: Date;
+};
+
 export const metadata: Metadata = {
     title: "Articles",
     description:
@@ -16,7 +25,7 @@ export const metadata: Metadata = {
     },
 };
 
-async function getArticles() {
+async function getArticles(): Promise<ArticleListItem[]> {
     try {
         const articles = await prisma.article.findMany({
             where: { published: true },

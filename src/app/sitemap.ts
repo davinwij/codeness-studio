@@ -3,6 +3,11 @@ import type { MetadataRoute } from "next";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://codeness.studio";
 
+type SitemapArticle = {
+    slug: string;
+    updatedAt: Date;
+};
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Static pages
     const staticPages: MetadataRoute.Sitemap = [
@@ -22,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     try {
         // Dynamic article pages
-        const articles = await prisma.article.findMany({
+        const articles: SitemapArticle[] = await prisma.article.findMany({
             where: { published: true },
             select: { slug: true, updatedAt: true },
             orderBy: { createdAt: "desc" },
